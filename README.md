@@ -1,18 +1,18 @@
-# JSON Juggle
+# JSON Juggler
 
-JSON Juggle is a Javascript/Typescript library for manipulating JSON data asynchronously. With JSON Juggle, you can easily update the values of array elements or object fields at any level in the JSON data.
+JSON Juggler is a Javascript/Typescript library for manipulating JSON data asynchronously. With JSON Juggler, you can easily update the values of array elements or object fields at any level in the JSON data.
 
 ## Installation
 
-You can install JSON Juggle via npm by running the following command in your terminal:
+You can install JSON Juggler via npm by running the following command in your terminal:
 
 ```bash
-npm install json-juggle
+npm install json-juggler
 ```
 
 ## Usage
 
-JSON Juggle exports one function called manipulate. The function takes three arguments:
+JSON Juggler exports one function called manipulate. The function takes three arguments:
 
 ```js
 manipulate(data, jsonpath, callback, options);
@@ -22,33 +22,33 @@ manipulate(data, jsonpath, callback, options);
 - `jsonpath` - The JSONPath expression to select the elements to manipulate.
 - `updateFn` - The function to apply to the selected elements. It takes one argument, the current value of the element, and should return the new value of the element.
 - `options` - An optional object that specifies additional options for the manipulation. Currently, the only supported option is clone, which determines whether to clone the original data or manipulate it directly. The default value is false, which means to manipulate the original data directly.
-  JSON Juggle returns a Promise that resolves to the manipulated JSON data.
+  JSON Juggler returns a Promise that resolves to the manipulated JSON data.
 
 You can use asynchronous functions such as fetch or database operations as the updateFn. The manipulate function will return a Promise that resolves with the updated data when all updates are complete.
 
-Here are some examples of how to use JSON Juggle:
+Here are some examples of how to use JSON Juggler:
 
 ```js
-const { manipulate } = require("json-juggle");
+const { manipulate } = require('json-juggler');
 
 const data = [1, 2, 3];
-const result = await manipulate(data, "$[*]", (value) => {
+const result = await manipulate(data, '$[*]', (value) => {
   return value - 1;
 });
 // result = [0, 1, 2]
 
 const data = { list: [1, 2, 3] };
-const result = await manipulate(data, "list[*]", (value) => {
+const result = await manipulate(data, 'list[*]', (value) => {
   return value - 1;
 });
 // result = { list: [0, 1, 2] }
 
 const data = [
-  { id: "item1", name: "Item 1" },
-  { id: "item2", name: "Item 2" },
-  { id: "item3", name: "Item 3" },
+  { id: 'item1', name: 'Item 1' },
+  { id: 'item2', name: 'Item 2' },
+  { id: 'item3', name: 'Item 3' },
 ];
-const result = await manipulate(data, "$[*]", (value) => {
+const result = await manipulate(data, '$[*]', (value) => {
   return { ...value, version: 0 };
 });
 // result = [
@@ -64,7 +64,7 @@ const data = {
   },
   d: [1, 2, 3],
 };
-const result = await manipulate(data, "b.c", (value) => {
+const result = await manipulate(data, 'b.c', (value) => {
   return value + 1;
 });
 // result = {
@@ -78,7 +78,7 @@ const result = await manipulate(data, "b.c", (value) => {
 const data = {
   a: 1,
 };
-const result = await manipulate(data, "a", (value) => {
+const result = await manipulate(data, 'a', (value) => {
   return value + 1;
 });
 // result = {
@@ -93,7 +93,7 @@ const data = {
 };
 const result = await manipulate(
   data,
-  "a",
+  'a',
   (value) => {
     return value + 1;
   },
